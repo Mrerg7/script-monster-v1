@@ -1,0 +1,80 @@
+---
+import { ACQUISITION_MAILTO, cfImageUrl, CF_IMAGES } from '../config/site';
+
+const heroImage = cfImageUrl(CF_IMAGES.heroImageId);
+---
+
+<section class="relative pt-16 pb-16 md:pt-20 md:pb-20 overflow-hidden border-b border-white/10">
+  <!-- Background Image -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src={heroImage}
+      alt="A dramatic, cinematic scene of a focused writer at a sleek laptop, surrounded by swirling creative energy — floating manuscripts, film reels, and pages transforming into a powerful force of light and ideas"
+      class="w-full h-full object-cover opacity-40"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/70 via-zinc-950/60 to-zinc-950"></div>
+  </div>
+
+  <!-- Creative grid overlay -->
+  <div class="absolute inset-0 z-[1] creative-grid opacity-30 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-x-2 px-4 py-1.5 rounded-3xl bg-white/5 border border-white/10 mb-8">
+      <div class="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
+      <span class="text-xs font-medium tracking-[1.5px] text-amber-400">PREMIUM DOMAIN • STRATEGIC ACQUISITION</span>
+    </div>
+
+    <!-- Domain Name -->
+    <h1 class="font-display text-[4rem] md:text-[6rem] leading-[0.9] tracking-[-0.06em] mb-4">
+      <span class="text-white">script</span><span class="monster-text">.monster</span>
+    </h1>
+
+    <!-- Tagline -->
+    <p class="text-3xl md:text-4xl font-display tracking-tight mb-6">
+      <span class="monster-gradient">Unleash the Monster.</span>
+    </p>
+
+    <!-- Subheadline -->
+    <p class="max-w-3xl mx-auto text-lg md:text-xl text-zinc-300 leading-relaxed mb-10">
+      The script is in you.<br class="hidden sm:block" />
+      With a laptop and an internet connection, any intermedia artist can create from anywhere in the world.
+      That screenplay, manuscript, or novel has been waiting inside you.<br class="hidden sm:block" />
+      Now it's time to set it free.
+    </p>
+
+    <!-- CTA -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+      <a
+        href={ACQUISITION_MAILTO}
+        class="group w-full sm:w-auto inline-flex items-center justify-center gap-x-3 px-9 py-4 text-lg font-semibold rounded-3xl bg-white text-zinc-950 hover:bg-zinc-100 active:scale-[0.985] transition-all shadow-xl shadow-black/20"
+      >
+        <span>Inquire About Acquisition</span>
+        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+      </a>
+      <a
+        href="#vision"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-x-2 px-8 py-4 text-lg font-medium rounded-3xl border border-white/20 hover:bg-white/5 transition-all"
+      >
+        <span>Explore the vision</span>
+      </a>
+    </div>
+
+    <!-- Trust signals -->
+    <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-zinc-400">
+      <div class="flex items-center gap-x-2">
+        <i class="fa-solid fa-check text-amber-400"></i>
+        <span>Category-defining brand asset</span>
+      </div>
+      <div class="flex items-center gap-x-2">
+        <i class="fa-solid fa-check text-amber-400"></i>
+        <span>Creator-economy ready</span>
+      </div>
+      <div class="flex items-center gap-x-2">
+        <i class="fa-solid fa-check text-amber-400"></i>
+        <span>Instant brand authority</span>
+      </div>
+    </div>
+  </div>
+</section>
