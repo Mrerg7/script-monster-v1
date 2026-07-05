@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { SITE, OG_IMAGE, ACQUISITION_MAILTO, cfImageUrl, CF_IMAGES } from '../config/site';
+import { SITE, OG_IMAGE, ACQUISITION_MAILTO, canonicalUrl, cfImageUrl, CF_IMAGES } from '../config/site';
 
 interface Props {
   title?: string;
@@ -16,7 +16,7 @@ const {
   noindex = false,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, SITE.url);
+const canonicalURL = canonicalUrl(Astro.url.pathname);
 const publishedDate = '2026-06-23';
 
 const structuredData = {
@@ -24,30 +24,30 @@ const structuredData = {
   '@graph': [
     {
       '@type': 'WebSite',
-      '@id': `${SITE.url}/#website`,
-      url: SITE.url,
+      '@id': `${canonicalURL}#website`,
+      url: canonicalURL,
       name: SITE.name,
       description,
       inLanguage: 'en-US',
     },
     {
       '@type': 'WebPage',
-      '@id': `${SITE.url}/#webpage`,
-      url: SITE.url,
+      '@id': `${canonicalURL}#webpage`,
+      url: canonicalURL,
       name: title,
       description,
-      isPartOf: { '@id': `${SITE.url}/#website` },
+      isPartOf: { '@id': `${canonicalURL}#website` },
       datePublished: publishedDate,
       dateModified: publishedDate,
       inLanguage: 'en-US',
     },
     {
       '@type': 'Product',
-      '@id': `${SITE.url}/#product`,
+      '@id': `${canonicalURL}#product`,
       name: 'script.monster Premium Domain Name',
       description:
         'The premium domain for screenwriters, novelists, filmmakers, and storytellers. A foundational brand asset engineered for the creator economy and entertainment verticals. Available for strategic acquisition.',
-      url: SITE.url,
+      url: canonicalURL,
       image: OG_IMAGE,
       category: 'Premium Domain Name',
       brand: {
@@ -119,9 +119,9 @@ const structuredData = {
     },
     {
       '@type': 'Organization',
-      '@id': `${SITE.url}/#organization`,
+      '@id': `${canonicalURL}#organization`,
       name: SITE.name,
-      url: SITE.url,
+      url: canonicalURL,
       email: SITE.email,
       address: {
         '@type': 'PostalAddress',
@@ -165,6 +165,7 @@ const structuredData = {
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content="script.monster — Premium Domain for Screenwriters & Storytellers" />
 
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href={cfImageUrl(CF_IMAGES.heroImageId, 'public')} />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

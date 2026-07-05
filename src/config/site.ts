@@ -10,6 +10,17 @@ export const SITE = {
   googleSiteVerification: 't_o0SHGI1TEvtW-uuHpFrHf1YWWr5_Cdo1XfaieQDPo',
 } as const;
 
+/** Canonical URL with trailing slash (matches Astro trailingSlash + Workers html_handling). */
+export function canonicalUrl(pathname: string): string {
+  const normalized =
+    pathname === '/' || pathname === ''
+      ? '/'
+      : pathname.endsWith('/')
+        ? pathname
+        : `${pathname}/`;
+  return new URL(normalized, SITE.url).href;
+}
+
 export const CF_IMAGES = {
   accountHash: '-sPAUAWeA405NiWJ0SNIQA',
   heroImageId: '8b4611d5-4e7c-4d6a-7e4e-d663754a5400',
