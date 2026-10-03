@@ -146,20 +146,35 @@
   } catch (e) {
     return;
   }
-  setTimeout(function () {
-    armed = true;
-  }, 12000);
-  document.addEventListener("mouseout", function (event) {
-    if (!armed || event.clientY > 12) return;
+  function closeExit() {
+    exit.hidden = true;
+  }
+  function openExit() {
+    if (!armed || !exit.hidden) return;
+    armed = false;
     try {
       sessionStorage.setItem("sm-exit", "1");
     } catch (e) {}
     exit.hidden = false;
-    armed = false;
+    var close = exit.querySelector("[data-exit-close]");
+    if (close) close.focus();
+  }
+  setTimeout(function () {
+    armed = true;
+  }, 8000);
+  document.documentElement.addEventListener("mouseleave", function (event) {
+    if (event.clientY > 0) return;
+    openExit();
+  });
+  exit.addEventListener("click", function (event) {
+    if (event.target === exit) closeExit();
+  });
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") closeExit();
   });
   exit.querySelectorAll("[data-exit-close]").forEach(function (btn) {
     btn.addEventListener("click", function () {
-      exit.hidden = true;
+      closeExit();
     });
   });
 })();

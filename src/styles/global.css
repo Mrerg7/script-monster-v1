@@ -90,6 +90,13 @@
       transparent 68%
     );
   }
+  .exit-shade {
+    background: color-mix(in srgb, var(--fg) 42%, transparent);
+  }
+}
+
+[hidden] {
+  display: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
