@@ -1,35 +1,31 @@
 export const SITE = {
-  name: 'script.monster',
-  title: 'script.monster • Premium Domain for Sale | Unleash the Monster',
+  name: "script.monster",
+  brand: "Desert Rich",
+  title: "script.monster | Premium Domain for Sale | Desert Rich",
   description:
-    'script.monster — The premium domain for screenwriters, novelists, filmmakers, and storytellers. A foundational brand asset for the creator economy. Available for strategic acquisition.',
-  url: 'https://script.monster',
-  email: 'sales@desertrich.com',
-  locale: 'en_US',
-  location: 'Arizona',
-  googleSiteVerification: 't_o0SHGI1TEvtW-uuHpFrHf1YWWr5_Cdo1XfaieQDPo',
+    "script.monster is for sale. Asking $125,000. Exact-match premium domain for screenwriters, studios, and story platforms. Buy now, make an offer, or contact the agent. Escrow transfer. Phoenix, Arizona.",
+  url: "https://script.monster",
+  email: "sales@desertrich.com",
+  locale: "en_US",
+  location: "Phoenix, Arizona",
+  ask: 125000,
+  askLabel: "$125,000",
+  googleSiteVerification: "t_o0SHGI1TEvtW-uuHpFrHf1YWWr5_Cdo1XfaieQDPo",
+  updated: "2026-10-03",
 } as const;
 
-/** Canonical URL with trailing slash (matches Astro trailingSlash + Workers html_handling). */
 export function canonicalUrl(pathname: string): string {
   const normalized =
-    pathname === '/' || pathname === ''
-      ? '/'
-      : pathname.endsWith('/')
+    pathname === "/" || pathname === ""
+      ? "/"
+      : pathname.endsWith("/")
         ? pathname
         : `${pathname}/`;
   return new URL(normalized, SITE.url).href;
 }
 
-export const CF_IMAGES = {
-  accountHash: '-sPAUAWeA405NiWJ0SNIQA',
-  heroImageId: '8b4611d5-4e7c-4d6a-7e4e-d663754a5400',
-} as const;
-
-export function cfImageUrl(imageId: string, variant = 'public'): string {
-  return `https://imagedelivery.net/${CF_IMAGES.accountHash}/${imageId}/${variant}`;
-}
-
-export const OG_IMAGE = cfImageUrl(CF_IMAGES.heroImageId);
-
-export const ACQUISITION_MAILTO = `mailto:${SITE.email}?subject=${encodeURIComponent('script.monster Domain Acquisition Inquiry')}&body=${encodeURIComponent('Hello,\n\nI am interested in acquiring script.monster.\n\nIntended use:\nBudget range:\n\nThank you.')}`;
+export const ACQUISITION_MAILTO = `mailto:${SITE.email}?subject=${encodeURIComponent(
+  "script.monster Domain Acquisition Inquiry",
+)}&body=${encodeURIComponent(
+  "Hello,\n\nI am interested in acquiring script.monster.\n\nPath:\nIntended use:\nBudget range:\n\nThank you.",
+)}`;

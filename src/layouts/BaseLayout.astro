@@ -1,176 +1,112 @@
 ---
-import '../styles/global.css';
-import { SITE, OG_IMAGE, ACQUISITION_MAILTO, canonicalUrl, cfImageUrl, CF_IMAGES } from '../config/site';
+import "../styles/global.css";
+import { SITE, canonicalUrl } from "../config/site";
 
 interface Props {
   title?: string;
   description?: string;
-  ogImage?: string;
   noindex?: boolean;
 }
 
-const {
-  title = SITE.title,
-  description = SITE.description,
-  ogImage = OG_IMAGE,
-  noindex = false,
-} = Astro.props;
-
+const { title = SITE.title, description = SITE.description, noindex = false } = Astro.props;
 const canonicalURL = canonicalUrl(Astro.url.pathname);
-const publishedDate = '2026-06-23';
 
 const structuredData = {
-  '@context': 'https://schema.org',
-  '@graph': [
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      '@type': 'WebSite',
-      '@id': `${canonicalURL}#website`,
-      url: canonicalURL,
+      "@type": "WebSite",
+      "@id": `${SITE.url}/#website`,
+      url: `${SITE.url}/`,
       name: SITE.name,
-      description,
-      inLanguage: 'en-US',
+      description: SITE.description,
+      inLanguage: "en-US",
+      publisher: { "@id": `${SITE.url}/#org` },
     },
     {
-      '@type': 'WebPage',
-      '@id': `${canonicalURL}#webpage`,
+      "@type": "Organization",
+      "@id": `${SITE.url}/#org`,
+      name: SITE.brand,
+      url: `${SITE.url}/`,
+      email: SITE.email,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Phoenix",
+        addressRegion: "AZ",
+        addressCountry: "US",
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${canonicalURL}#webpage`,
       url: canonicalURL,
       name: title,
       description,
-      isPartOf: { '@id': `${canonicalURL}#website` },
-      datePublished: publishedDate,
-      dateModified: publishedDate,
-      inLanguage: 'en-US',
+      isPartOf: { "@id": `${SITE.url}/#website` },
+      about: { "@id": `${SITE.url}/#domain` },
+      dateModified: SITE.updated,
+      inLanguage: "en-US",
     },
     {
-      '@type': 'Product',
-      '@id': `${canonicalURL}#product`,
-      name: 'script.monster Premium Domain Name',
+      "@type": "Product",
+      "@id": `${SITE.url}/#domain`,
+      name: "script.monster",
       description:
-        'The premium domain for screenwriters, novelists, filmmakers, and storytellers. A foundational brand asset engineered for the creator economy and entertainment verticals. Available for strategic acquisition.',
-      url: canonicalURL,
-      image: OG_IMAGE,
-      category: 'Premium Domain Name',
-      brand: {
-        '@type': 'Brand',
-        name: 'script.monster',
-      },
+        "Premium exact-match domain name for sale. Built for screenwriting, storytelling platforms, studios, and the creator economy.",
+      category: "Premium domain name",
+      brand: { "@type": "Brand", name: "script.monster" },
+      url: `${SITE.url}/`,
       offers: {
-        '@type': 'Offer',
-        url: ACQUISITION_MAILTO,
-        price: '125000',
-        priceCurrency: 'USD',
-        availability: 'https://schema.org/InStock',
-        seller: {
-          '@type': 'Organization',
-          name: SITE.name,
-          email: SITE.email,
-        },
-        shippingDetails: {
-          '@type': 'OfferShippingDetails',
-          shippingRate: {
-            '@type': 'MonetaryAmount',
-            value: '0.00',
-            currency: 'USD',
-          },
-          deliveryTime: {
-            '@type': 'ShippingDeliveryTime',
-            handlingTime: {
-              '@type': 'QuantitativeValue',
-              minValue: 0,
-              maxValue: 1,
-              unitCode: 'DAY',
-            },
-            transitTime: {
-              '@type': 'QuantitativeValue',
-              minValue: 0,
-              maxValue: 0,
-              unitCode: 'DAY',
-            },
-          },
-          shippingDestination: {
-            '@type': 'DefinedRegion',
-            addressCountry: 'US',
-          },
-        },
-        hasMerchantReturnPolicy: {
-          '@type': 'MerchantReturnPolicy',
-          returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
-          returnMethod: 'https://schema.org/ReturnByMail',
-          returnFees: 'https://schema.org/FreeReturn',
-          applicableCountry: 'US',
-          merchantReturnDays: 0,
-        },
-      },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '5',
-        bestRating: '5',
-        ratingCount: '1',
-      },
-      review: {
-        '@type': 'Review',
-        author: {
-          '@type': 'Organization',
-          name: SITE.name,
-        },
-        reviewBody:
-          'A bold, memorable .monster domain that commands instant authority in the storytelling space — a rare, brand-defining digital asset for screenwriters, producers, and creative platforms.',
-      },
-    },
-    {
-      '@type': 'Organization',
-      '@id': `${canonicalURL}#organization`,
-      name: SITE.name,
-      url: canonicalURL,
-      email: SITE.email,
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Phoenix',
-        addressRegion: 'AZ',
-        addressCountry: 'US',
+        "@type": "Offer",
+        url: `${SITE.url}/acquire/`,
+        price: String(SITE.ask),
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        seller: { "@id": `${SITE.url}/#org` },
       },
     },
   ],
 };
+
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="google-site-verification" content={SITE.googleSiteVerification} />
-
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content={noindex ? 'noindex' : 'index, follow, max-image-preview:large'} />
+    <meta name="robots" content={noindex ? "noindex" : "index, follow, max-image-preview:large"} />
+    <meta name="author" content={SITE.brand} />
+    <meta name="theme-color" content="#9a3412" />
     <link rel="canonical" href={canonicalURL} />
-
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:secure_url" content={ogImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="script.monster — Premium Domain for Screenwriters & Storytellers" />
     <meta property="og:locale" content={SITE.locale} />
-
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-    <meta name="twitter:image:alt" content="script.monster — Premium Domain for Screenwriters & Storytellers" />
-
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" href={cfImageUrl(CF_IMAGES.heroImageId, 'public')} />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <script is:inline>
+      try {
+        var k = "sm-theme";
+        var s = localStorage.getItem(k);
+        var d = s ? s === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.classList.toggle("dark", d);
+      } catch (e) {}
+    </script>
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
+    <a href="#content" class="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-50 focus:bg-ember focus:px-4 focus:py-3 focus:text-on-ember">
+      Skip to content
+    </a>
     <slot />
+    <script src="/site.js" defer></script>
   </body>
 </html>

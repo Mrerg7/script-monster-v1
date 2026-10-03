@@ -1,0 +1,74 @@
+---
+import { SITE, ACQUISITION_MAILTO } from "../config/site";
+---
+
+<header class="sticky top-0 z-40 border-b border-line bg-bg/90 backdrop-blur">
+  <div class="mx-auto flex h-20 max-w-6xl items-center justify-between gap-3 px-5">
+    <a href="/" class="font-display text-xl tracking-tight sm:text-2xl">script.monster</a>
+    <nav class="hidden items-center gap-6 lg:flex" aria-label="Primary">
+      <a class="text-muted hover:text-fg" href="/#fit">Fit</a>
+      <a class="text-muted hover:text-fg" href="/#why">Why it</a>
+      <a class="text-muted hover:text-fg" href="/brief/">Brief</a>
+      <a class="text-muted hover:text-fg" href="/acquire/">Acquire</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <button type="button" data-theme class="inline-flex h-12 w-12 items-center justify-center border border-line" aria-label="Switch to dark">
+        <span aria-hidden="true">◐</span>
+      </button>
+      <a href="/acquire/?intent=offer" class="btn btn-ember hidden sm:inline-flex">Make offer</a>
+      <button
+        type="button"
+        data-menu-toggle
+        class="inline-flex h-12 items-center justify-center border border-line px-3 lg:hidden"
+        aria-expanded="false"
+        aria-label="Open menu"
+      >
+        Menu
+      </button>
+    </div>
+  </div>
+  <nav data-menu hidden class="border-t border-line px-5 py-3 lg:hidden" aria-label="Mobile">
+    <a class="flex h-12 items-center border-b border-line" href="/#fit">Fit</a>
+    <a class="flex h-12 items-center border-b border-line" href="/#why">Why it</a>
+    <a class="flex h-12 items-center border-b border-line" href="/brief/">Brief</a>
+    <a class="flex h-12 items-center border-b border-line" href="/acquire/">Acquire</a>
+    <a href={`/acquire/?intent=buy`} class="btn btn-ember mt-3 w-full">Buy now · {SITE.askLabel}</a>
+  </nav>
+</header>
+
+<main id="content">
+  <slot />
+</main>
+
+<footer class="border-t border-line">
+  <div class="mx-auto grid max-w-6xl gap-8 px-5 py-12 sm:grid-cols-2">
+    <div>
+      <p class="font-display text-3xl">script.monster</p>
+      <p class="mt-2 max-w-sm text-muted">Where the story begins. One name. One owner. Offered by {SITE.brand}.</p>
+    </div>
+    <div class="flex flex-col gap-2 sm:items-end">
+      <a class="hover:text-ember" href={ACQUISITION_MAILTO}>{SITE.email}</a>
+      <a class="hover:text-ember" href="/brief/">Valuation brief</a>
+      <a class="hover:text-ember" href="/acquire/?intent=agent">Contact the agent</a>
+      <a class="hover:text-ember" href="/sitemap-index.xml">Sitemap</a>
+    </div>
+  </div>
+  <p class="mx-auto max-w-6xl border-t border-line px-5 py-6 text-muted">
+    script.monster is offered for sale by its registrant. This page is an invitation to inquire, not a binding
+    contract. Transfer completes only under a written agreement and a reputable escrow service. The buyer is
+    responsible for trademark clearance. Updated {SITE.updated}. © 2026 {SITE.brand}. {SITE.location}.
+  </p>
+</footer>
+
+<div data-exit hidden class="fixed inset-0 z-50 flex items-end justify-center bg-fg/40 p-4 sm:items-center">
+  <div role="dialog" aria-modal="true" aria-labelledby="exit-title" class="w-full max-w-lg border border-line bg-bg p-6 sm:p-8">
+    <p class="uppercase tracking-[0.16em] text-ember">Before you leave</p>
+    <h2 id="exit-title" class="mt-2 font-display text-4xl">The brief is one page. The name is one of one.</h2>
+    <p class="mt-3 text-muted">Read how the {SITE.askLabel} ask is framed, then send an offer if it fits. No countdown. No fake viewers.</p>
+    <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+      <a href="/brief/" class="btn btn-ember" data-exit-close>Read the brief</a>
+      <a href="/acquire/?intent=offer" class="btn border border-line" data-exit-close>Make an offer</a>
+      <button type="button" class="h-12 px-3 text-muted" data-exit-close>Close</button>
+    </div>
+  </div>
+</div>
