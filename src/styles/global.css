@@ -82,6 +82,14 @@
   .btn-line {
     border: 1px solid var(--fg);
   }
+  .hero-fade {
+    background: linear-gradient(
+      to top,
+      var(--bg) 0%,
+      color-mix(in srgb, var(--bg) 45%, transparent) 38%,
+      transparent 68%
+    );
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

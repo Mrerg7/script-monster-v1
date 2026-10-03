@@ -12,6 +12,9 @@ export const SITE = {
   askLabel: "$125,000",
   googleSiteVerification: "t_o0SHGI1TEvtW-uuHpFrHf1YWWr5_Cdo1XfaieQDPo",
   updated: "2026-10-03",
+  hero: "https://imagedelivery.net/-sPAUAWeA405NiWJ0SNIQA/09c1cbc2-2946-4c89-a700-4c68a42e1b00/public",
+  heroAlt:
+    "A brass film reel holding pages of a screenplay, with loose film and leather gloves on a writing desk.",
 } as const;
 
 export function canonicalUrl(pathname: string): string {

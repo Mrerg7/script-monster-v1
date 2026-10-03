@@ -55,6 +55,7 @@ const structuredData = {
         "Premium exact-match domain name for sale. Built for screenwriting, storytelling platforms, studios, and the creator economy.",
       category: "Premium domain name",
       brand: { "@type": "Brand", name: "script.monster" },
+      image: SITE.hero,
       url: `${SITE.url}/`,
       offers: {
         "@type": "Offer",
@@ -92,6 +93,11 @@ const structuredData = {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta property="og:image" content={SITE.hero} />
+    <meta property="og:image:alt" content={SITE.heroAlt} />
+    <meta name="twitter:image" content={SITE.hero} />
+    <meta name="twitter:image:alt" content={SITE.heroAlt} />
+    <link rel="preload" as="image" href={SITE.hero} />
     <script is:inline>
       try {
         var k = "sm-theme";
